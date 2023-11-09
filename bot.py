@@ -14,7 +14,7 @@ from ast import literal_eval
 domain = "https://api.chootc.com"
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    await context.bot.send_message(chat_id=update.effective_chat.id, text="Tham giá @chootcvn để mua, bán USDT số lượng lớn.", parse_mode=constants.ParseMode.HTML)
+    await context.bot.send_message(chat_id=update.effective_chat.id, text="HeroTeam", parse_mode=constants.ParseMode.HTML)
 
 
 async def messageHandler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -22,6 +22,9 @@ async def messageHandler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     chat_id = update.effective_chat.id
     message = update.message.text
     reply_to_message = update.message.reply_to_message
+
+    if update.message.chat.type == "private":
+        return
 
     if "chốt mua" in message.lower() or "chốt bán" in message.lower():
         amount = float(message.split()[2].split("/")[0].replace("usdt","").replace(",",""))
@@ -148,9 +151,9 @@ async def messageHandler(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 
 
 app = ApplicationBuilder().token(
-    "6217705988:AAEOYp5g31rkl-iWrXAGE_mo7t0f0Oz3qIo").build()
+    "6401609811:AAFHf746Pzq-Fv9ngogNOtUKEfrpe0EBJ5Q").build()
 
-app.add_handler(CommandHandler("start", start))
+# app.add_handler(CommandHandler("start", start))
 app.add_handler(MessageHandler(filters.ALL, messageHandler))
 
 app.run_polling()
